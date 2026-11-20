@@ -1,26 +1,286 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tw-animate-css";
+
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* =========================================
+   AWL TRADING THEME
+========================================= */
 
 @theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: Arial, Helvetica, sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* AWL CUSTOM COLORS */
+
+  --color-awl-dark: var(--awl-dark);
+  --color-awl-gold: var(--awl-gold);
+  --color-awl-green: var(--awl-green);
+  --color-awl-bg: var(--awl-bg);
+  --color-awl-light: var(--awl-light);
+
+  /* CHARTS */
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* SIDEBAR */
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground:
+    var(--sidebar-primary-foreground);
+
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground:
+    var(--sidebar-accent-foreground);
+
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* RADIUS */
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =========================================
+   LIGHT THEME
+========================================= */
+
+:root {
+  --radius: 0.75rem;
+
+  /* AWL COLORS */
+
+  --awl-dark: #2d2417;
+  --awl-gold: #c8a96e;
+  --awl-green: #0b3b24;
+  --awl-bg: #faf8f5;
+  --awl-light: #f8f6f2;
+
+  /* MAIN */
+
+  --background: #faf8f5;
+  --foreground: #2d2417;
+
+  /* CARD */
+
+  --card: #ffffff;
+  --card-foreground: #2d2417;
+
+  /* POPOVER */
+
+  --popover: #ffffff;
+  --popover-foreground: #2d2417;
+
+  /* PRIMARY */
+
+  --primary: #2d2417;
+  --primary-foreground: #ffffff;
+
+  /* SECONDARY */
+
+  --secondary: #f1ede7;
+  --secondary-foreground: #2d2417;
+
+  /* MUTED */
+
+  --muted: #f8f6f2;
+  --muted-foreground: #78716c;
+
+  /* ACCENT */
+
+  --accent: #c8a96e;
+  --accent-foreground: #2d2417;
+
+  /* DESTRUCTIVE */
+
+  --destructive: #dc2626;
+
+  /* BORDERS */
+
+  --border: #e7e5e4;
+  --input: #e7e5e4;
+  --ring: #c8a96e;
+
+  /* CHARTS */
+
+  --chart-1: #2d2417;
+  --chart-2: #c8a96e;
+  --chart-3: #0b3b24;
+  --chart-4: #a4865a;
+  --chart-5: #78716c;
+
+  /* SIDEBAR */
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2d2417;
+
+  --sidebar-primary: #2d2417;
+  --sidebar-primary-foreground: #ffffff;
+
+  --sidebar-accent: #f8f6f2;
+  --sidebar-accent-foreground: #2d2417;
+
+  --sidebar-border: #e7e5e4;
+  --sidebar-ring: #c8a96e;
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+.dark {
+  --background: #17130e;
+  --foreground: #faf8f5;
+
+  --card: #211b14;
+  --card-foreground: #faf8f5;
+
+  --popover: #211b14;
+  --popover-foreground: #faf8f5;
+
+  --primary: #c8a96e;
+  --primary-foreground: #2d2417;
+
+  --secondary: #30281f;
+  --secondary-foreground: #faf8f5;
+
+  --muted: #30281f;
+  --muted-foreground: #a8a29e;
+
+  --accent: #c8a96e;
+  --accent-foreground: #2d2417;
+
+  --destructive: #ef4444;
+
+  --border: #3d3328;
+  --input: #3d3328;
+  --ring: #c8a96e;
+
+  --sidebar: #211b14;
+  --sidebar-foreground: #faf8f5;
+
+  --sidebar-primary: #c8a96e;
+  --sidebar-primary-foreground: #2d2417;
+
+  --sidebar-accent: #30281f;
+  --sidebar-accent-foreground: #faf8f5;
+
+  --sidebar-border: #3d3328;
+  --sidebar-ring: #c8a96e;
+}
+
+/* =========================================
+   BASE
+========================================= */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =========================================
+   AWL GLOBAL UTILITIES
+========================================= */
+
+@layer utilities {
+  .awl-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .awl-container {
+      padding-inline: 2rem;
+    }
+  }
+
+  .awl-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .text-awl-gold {
+    color: var(--awl-gold);
+  }
+
+  .bg-awl-dark {
+    background-color: var(--awl-dark);
+  }
+
+  .bg-awl-gold {
+    background-color: var(--awl-gold);
+  }
+
+  .bg-awl-green {
+    background-color: var(--awl-green);
+  }
 }

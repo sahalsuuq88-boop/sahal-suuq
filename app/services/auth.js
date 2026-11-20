@@ -1,0 +1,26 @@
+import api from '../lib/api';
+
+
+const authService = {
+
+
+    register:(data)=>
+        api.post("/auth/register",data),
+
+
+    login:(data)=>
+        api.post("/auth/login",data),
+
+
+    profile:()=>
+        api.get("/auth/profile"),
+
+
+    logout:()=>
+        api.post("/auth/logout")
+
+
+};
+
+
+export default authService;
