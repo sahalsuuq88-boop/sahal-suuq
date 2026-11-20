@@ -20,7 +20,7 @@ import {
   Loader2,
 } from "lucide-react";
 
-import useOrders from "@/hook/useOrders";
+import useOrders from "../../../hook/useOrders";
 import api from "../../lib/api";
 
 export default function OrderSummary() {
