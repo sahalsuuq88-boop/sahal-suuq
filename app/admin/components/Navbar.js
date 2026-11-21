@@ -14,7 +14,6 @@ import {
   Users,
   Folder,
   LayoutDashboard,
-  User,
   X,
 } from "lucide-react";
 
@@ -23,6 +22,7 @@ import Logo from "../../home/component/logo";
 import DarkLogo from "../../home/component/dackLogo";
 import useNotifications from "../../hook/useNotification";
 import { useUser } from "../../hook/useUser";
+import { useAdminOrdersSocket } from "../../hook/useAdminOrdersSocket";
 
 const menus = [
   {
@@ -71,14 +71,27 @@ export default function Navbar() {
   } = useNotifications();
 
   const [menuVisible, setMenuVisible] = useState(false);
-  const [mobileMenuVisible, setMobileMenuVisible] =
-    useState(false);
-  const [notificationVisible, setNotificationVisible] =
-    useState(false);
+  const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [notificationVisible, setNotificationVisible] = useState(false);
+  const [socketBonusCount, setSocketBonusCount] = useState(0);
 
   React.useEffect(() => {
     reload?.();
   }, [reload]);
+
+  const isAdmin = user?.role?.trim()?.toLowerCase() === "admin";
+
+  const handleIncomingOrder = useCallback(() => {
+    setSocketBonusCount((prev) => prev + 1);
+    reload?.();
+  }, [reload]);
+
+  const { connected, notification, clearNotification } = useAdminOrdersSocket(
+    handleIncomingOrder,
+    isAdmin
+  );
+
+  const totalUnread = Math.max(unreadCount, 0) + socketBonusCount;
 
   const userName = user?.name || "Admin";
   const userRole = user?.role || "admin";
@@ -110,17 +123,6 @@ export default function Navbar() {
   };
 
   // =========================
-  // PROFILE
-  // =========================
-
-  // const handleProfile = () => {
-  //   setMenuVisible(false);
-  //   setMobileMenuVisible(false);
-
-  //   router.push("/admin/profile");
-  // };
-
-  // =========================
   // SETTINGS
   // =========================
 
@@ -132,7 +134,17 @@ export default function Navbar() {
   };
 
   // =========================
-  // NOTIFICATION
+  // OPEN BELL DROPDOWN
+  // =========================
+
+  const handleOpenNotifications = () => {
+    setNotificationVisible(true);
+    setSocketBonusCount(0);
+    reload?.();
+  };
+
+  // =========================
+  // NOTIFICATION PRESS
   // =========================
 
   const handleNotificationPress = async (item) => {
@@ -142,6 +154,7 @@ export default function Navbar() {
       }
 
       setNotificationVisible(false);
+      setSocketBonusCount(0);
 
       switch (item.type) {
         case "order":
@@ -174,6 +187,28 @@ export default function Navbar() {
   return (
     <>
       {/* =====================================================
+          REAL-TIME TOAST BANNER
+      ====================================================== */}
+
+      {notification && (
+        <div className="fixed bottom-5 right-5 z-[110] flex max-w-sm items-center justify-between gap-4 rounded-xl border border-[#C8A96E] bg-[#2D2417] px-5 py-4 text-[#FDFBF7] shadow-2xl">
+          <div>
+            <p className="text-sm font-bold text-[#C8A96E]">
+              {notification.title}
+            </p>
+            <p className="mt-0.5 text-sm">{notification.message}</p>
+          </div>
+          <button
+            type="button"
+            onClick={clearNotification}
+            className="rounded-lg bg-[#C8A96E] px-3 py-1.5 text-xs font-semibold text-[#2D2417] hover:opacity-90"
+          >
+            Xir
+          </button>
+        </div>
+      )}
+
+      {/* =====================================================
           HEADER
       ====================================================== */}
 
@@ -201,17 +236,25 @@ export default function Navbar() {
           {/* MOBILE LOGO */}
 
           <div className="flex items-center lg:hidden">
-            <div
-              className="flex items-center"
-            >
+            <div className="flex items-center">
               <Logo />
             </div>
           </div>
 
           {/* DESKTOP LEFT AREA */}
 
-          <div className="hidden items-center lg:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <div className="h-9 w-px bg-[#E8E3DA]" />
+            {isAdmin && (
+              <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#6B7280]">
+                <span
+                  className={`h-2 w-2 rounded-full ${
+                    connected ? "bg-emerald-500" : "bg-amber-500"
+                  }`}
+                />
+                <span>{connected ? "Live Orders" : "Connecting..."}</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -221,23 +264,19 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2 sm:gap-4">
 
-          {/* NOTIFICATION */}
+          {/* NOTIFICATION BELL BUTTON (NAVBAR) */}
 
           <button
             type="button"
-            onClick={() =>
-              setNotificationVisible(true)
-            }
+            onClick={handleOpenNotifications}
             className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-[#EEEAE3] bg-[#F8F6F2] text-[#2D2417] transition hover:bg-[#EFECE6]"
             aria-label="Notifications"
           >
             <Bell size={20} />
 
-            {unreadCount > 0 && (
-              <span className="absolute -right-1 -top-1 flex min-w-[18px] h-[18px] items-center justify-center rounded-full border-2 border-white bg-red-500 px-1 text-[9px] font-extrabold text-white">
-                {unreadCount > 99
-                  ? "99+"
-                  : unreadCount}
+            {totalUnread > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full border-2 border-white bg-red-500 px-1 text-[9px] font-extrabold text-white">
+                {totalUnread > 99 ? "99+" : totalUnread}
               </span>
             )}
           </button>
@@ -299,8 +338,6 @@ export default function Navbar() {
       {mobileMenuVisible && (
         <div className="fixed inset-0 z-[100] lg:hidden">
 
-          {/* OVERLAY */}
-
           <button
             type="button"
             aria-label="Close menu"
@@ -310,11 +347,7 @@ export default function Navbar() {
             className="absolute inset-0 bg-black/40"
           />
 
-          {/* DRAWER */}
-
           <aside className="relative flex h-full w-[280px] max-w-[85%] flex-col bg-[#2D2417] text-white shadow-2xl">
-
-            {/* MOBILE HEADER */}
 
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
 
@@ -337,8 +370,6 @@ export default function Navbar() {
                 <X size={19} />
               </button>
             </div>
-
-            {/* ADMIN INFO */}
 
             <div className="border-b border-white/10 px-5 py-4">
 
@@ -374,20 +405,16 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* MOBILE MENU */}
-
             <nav className="flex-1 space-y-2 overflow-y-auto px-4 py-5">
 
               {menus.map((menu) => {
                 const Icon = menu.icon;
 
                 const active =
-                  window.location.pathname ===
-                    menu.href ||
-                  (menu.href !== "/admin" &&
-                    window.location.pathname.startsWith(
-                      menu.href
-                    ));
+                  typeof window !== "undefined" &&
+                  (window.location.pathname === menu.href ||
+                    (menu.href !== "/admin" &&
+                      window.location.pathname.startsWith(menu.href)));
 
                 return (
                   <Link
@@ -411,8 +438,6 @@ export default function Navbar() {
                 );
               })}
             </nav>
-
-            {/* MOBILE FOOTER */}
 
             <div className="border-t border-white/10 p-5">
               <p className="text-sm font-semibold">
@@ -445,8 +470,6 @@ export default function Navbar() {
             className="absolute right-4 top-[68px] w-[260px] overflow-hidden rounded-2xl border border-[#E8E3DA] bg-white py-2 shadow-2xl sm:right-6"
           >
 
-            {/* USER */}
-
             <div className="flex items-center px-4 py-3.5">
 
               <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#2D2417]">
@@ -476,31 +499,6 @@ export default function Navbar() {
 
             <div className="my-1 h-px bg-[#F0ECE6]" />
 
-            {/* PROFILE */}
-
-            {/* <button
-              onClick={handleProfile}
-              className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left transition hover:bg-[#F8F6F2]"
-            >
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F8F6F2]">
-                <User
-                  size={18}
-                  className="text-[#2D2417]"
-                />
-              </span>
-
-              <span className="flex-1 text-xs font-semibold text-[#333]">
-                My Profile
-              </span>
-
-              <ChevronRight
-                size={15}
-                className="text-gray-400"
-              />
-            </button> */}
-
-            {/* SETTINGS */}
-
             <button
               onClick={handleSettings}
               className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left transition hover:bg-[#F8F6F2]"
@@ -524,8 +522,6 @@ export default function Navbar() {
 
             <div className="my-1 h-px bg-[#F0ECE6]" />
 
-            {/* LOGOUT */}
-
             <button
               onClick={handleLogout}
               className="flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left transition hover:bg-red-50"
@@ -546,7 +542,7 @@ export default function Navbar() {
       )}
 
       {/* =====================================================
-          NOTIFICATION DROPDOWN
+          NOTIFICATION DROPDOWN (NAVBAR BELL)
       ====================================================== */}
 
       {notificationVisible && (
@@ -590,7 +586,9 @@ export default function Navbar() {
                     onClick={() =>
                       handleNotificationPress(item)
                     }
-                    className="flex w-full gap-3 border-b border-[#F5F2ED] px-4 py-3 text-left transition hover:bg-[#FAF8F5]"
+                    className={`flex w-full gap-3 border-b border-[#F5F2ED] px-4 py-3 text-left transition hover:bg-[#FAF8F5] ${
+                      !item.isRead ? "bg-[#FDFBF7]" : ""
+                    }`}
                   >
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F8F6F2]">
                       <Bell
