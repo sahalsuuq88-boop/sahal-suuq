@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import useDashboard from "../hook/useDashboard";
 import { useUser } from "../hook/useUser";
+import { useAdminOrdersSocket } from "../hook/useAdminOrdersSocket";
 import StatCard from "./components/StatCard";
 import SalesChart from "./components/SalesChart";
 import RecentOrders from "./components/RecentOrders";
@@ -19,13 +20,29 @@ export default function AdminPage() {
   } = useDashboard();
 
   const { user } = useUser();
+  const isAdmin = user?.role?.trim()?.toLowerCase() === "admin";
 
   useEffect(() => {
-    if (user?.role === "admin") {
+    if (isAdmin) {
       getStats();
       getSales();
     }
-  }, [user, getStats, getSales]);
+  }, [isAdmin, getStats, getSales]);
+
+  const handleRealTimeOrder = useCallback(() => {
+    if (isAdmin) {
+      getStats();
+      getSales();
+    }
+  }, [isAdmin, getStats, getSales]);
+
+  const {
+    notification,
+    unreadCount,
+    connected,
+    clearNotification,
+    resetUnread,
+  } = useAdminOrdersSocket(handleRealTimeOrder, isAdmin);
 
   const dashboardStats = stats?.stats || [];
   const recentOrders = stats?.latestOrders || [];
@@ -52,19 +69,60 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F8F7F4]">
+    <main className="relative min-h-screen bg-[#F8F7F4]">
+      {/* Real-time Notification Pop-up */}
+      {notification && (
+        <div className="fixed bottom-5 right-5 z-50 flex max-w-sm items-center justify-between gap-4 rounded-xl border border-[#C8A96E] bg-[#2D2417] px-5 py-4 text-[#FDFBF7] shadow-2xl">
+          <div>
+            <p className="text-sm font-bold text-[#C8A96E]">
+              {notification.title}
+            </p>
+            <p className="mt-0.5 text-sm">{notification.message}</p>
+          </div>
+          <button
+            type="button"
+            onClick={clearNotification}
+            className="rounded-lg bg-[#C8A96E] px-3 py-1.5 text-xs font-semibold text-[#2D2417] hover:opacity-90"
+          >
+            Xir
+          </button>
+        </div>
+      )}
+
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
 
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-[#1F2937] sm:text-3xl">
-            Dashboard
-          </h1>
+        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
+          <div>
+            <h1 className="text-2xl font-bold text-[#1F2937] sm:text-3xl">
+              Dashboard
+            </h1>
 
-          <p className="mt-2 text-sm leading-6 text-[#6B7280]">
-            Welcome back to AWL Trading Company Admin Panel.
-          </p>
-          <ExchangeRate />
+            <p className="mt-2 text-sm leading-6 text-[#6B7280]">
+              Welcome back to AWL Trading Company Admin Panel.
+            </p>
+            <ExchangeRate />
+          </div>
+
+          {/* Live Status & New Order Counter */}
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 rounded-lg border bg-white px-3 py-1.5 text-xs font-medium text-[#1F2937]">
+              <span
+                className={`h-2.5 w-2.5 rounded-full ${
+                  connected ? "bg-emerald-500" : "bg-amber-500"
+                }`}
+              />
+              <span>{connected ? "Live" : "Connecting..."}</span>
+            </div>
+
+            <button
+              type="button"
+              onClick={resetUnread}
+              className="rounded-lg border border-[#C8A96E] bg-white px-3 py-1.5 text-xs font-semibold text-[#2D2417] hover:bg-[#FDFBF7]"
+            >
+              Cusub: {unreadCount}
+            </button>
+          </div>
         </div>
 
         {/* Statistics */}
