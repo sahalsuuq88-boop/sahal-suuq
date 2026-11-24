@@ -1,9 +1,18 @@
+
+const BASE_URL = "https://helsuuq-market.vercel.app";
+
 export default function robots() {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: [
+        "/admin/",
+        "/profile/",
+        "/login/",
+        "/register/",
+      ],
     },
-    sitemap: "https://sahalsuuq-frontend.vercel.app/sitemap.xml",
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

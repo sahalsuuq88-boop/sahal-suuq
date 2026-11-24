@@ -1,7 +1,7 @@
 export default function sitemap() {
   return [
     {
-      url: "https://sahalsuuq-frontend.vercel.app/home",
+      url: "https://helsuuq-market.vercel.app",
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,

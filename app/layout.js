@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: {
     default: "Hel Suuq | Gurigaaga, Gaadhsii - Online Shopping Hargeisa",
-    template: "%s | Sahal Suuq",
+    template: "%s | Hel Suuq",
   },
   description:
     "Hel Suuq waa suuqa online-ka ah ee Hargeisa. Ka dalbo raashinka, agabka nadaafadda, iyo alaabta guriga si fudud — Gurigaaga, gaadhsii.",
@@ -37,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: "HEL Suuq | Gurigaaga, Gaadhsii",
     description: "Ka dalbo alaabta guriga iyo raashinka Hargeisa si fudud oo degdeg ah.",
-    url: "https://sahalsuuq-frontend.vercel.app",
+    url: "https://helsuuq-market.vercel.app",
     siteName: "Hel Suuq",
     type: "website",
   },
