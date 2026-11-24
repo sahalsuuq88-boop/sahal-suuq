@@ -15,6 +15,7 @@ import {
   Folder,
   LayoutDashboard,
   X,
+  MessageSquare,
 } from "lucide-react";
 
 import { useRouter } from "next/navigation";
@@ -49,6 +50,11 @@ const menus = [
     title: "Customers",
     href: "/admin/customers",
     icon: Users,
+  },
+  {
+    title: "Messages",
+    href: "/admin/messages",
+    icon: MessageSquare,
   },
   {
     title: "Settings",
@@ -212,7 +218,8 @@ export default function Navbar() {
           HEADER
       ====================================================== */}
 
-      <header className="sticky top-0 z-40 flex h-[72px] w-full items-center justify-between border-b border-[#E8E3DA] bg-white px-4 sm:px-6 lg:px-7">
+      <header className="sticky top-0 z-80 flex h-[72px] w-full items-center justify-between border-b border-[#E8E3DA] bg-[#FDFBF7]/30 shadow-sm backdrop-blur-2xl px-4 sm:px-6 lg:px-7">
+        {/* sticky top-0 z-80 w-full border-b border-[#E8E3DA] bg-[#FDFBF7]/30 shadow-sm backdrop-blur-2xl */}
 
         {/* =================================================
             LEFT SIDE
@@ -248,9 +255,8 @@ export default function Navbar() {
             {isAdmin && (
               <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#6B7280]">
                 <span
-                  className={`h-2 w-2 rounded-full ${
-                    connected ? "bg-emerald-500" : "bg-amber-500"
-                  }`}
+                  className={`h-2 w-2 rounded-full ${connected ? "bg-emerald-500" : "bg-amber-500"
+                    }`}
                 />
                 <span>{connected ? "Live Orders" : "Connecting..."}</span>
               </div>
@@ -349,7 +355,7 @@ export default function Navbar() {
 
           <aside className="relative flex h-full w-[280px] max-w-[85%] flex-col bg-[#2D2417] text-white shadow-2xl">
 
-            <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-2">
 
               <div
                 onClick={() =>
@@ -423,11 +429,10 @@ export default function Navbar() {
                     onClick={() =>
                       setMobileMenuVisible(false)
                     }
-                    className={`flex items-center gap-3 rounded-xl px-4 py-3 transition ${
-                      active
+                    className={`flex items-center gap-3 rounded-xl px-4 py-3 transition ${active
                         ? "bg-[#C8A96E] text-white"
                         : "bg-[#221f19] text-slate-300 hover:bg-[#342d23] hover:text-white"
-                    }`}
+                      }`}
                   >
                     <Icon size={20} />
 
@@ -441,7 +446,7 @@ export default function Navbar() {
 
             <div className="border-t border-white/10 p-5">
               <p className="text-sm font-semibold">
-                SAHAL SUUQ
+                HEL SUUQ
               </p>
 
               <span className="text-xs text-slate-400">
@@ -586,9 +591,8 @@ export default function Navbar() {
                     onClick={() =>
                       handleNotificationPress(item)
                     }
-                    className={`flex w-full gap-3 border-b border-[#F5F2ED] px-4 py-3 text-left transition hover:bg-[#FAF8F5] ${
-                      !item.isRead ? "bg-[#FDFBF7]" : ""
-                    }`}
+                    className={`flex w-full gap-3 border-b border-[#F5F2ED] px-4 py-3 text-left transition hover:bg-[#FAF8F5] ${!item.isRead ? "bg-[#FDFBF7]" : ""
+                      }`}
                   >
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F8F6F2]">
                       <Bell

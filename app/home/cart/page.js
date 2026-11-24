@@ -395,7 +395,7 @@ Total: $${finalGrandTotal.toFixed(2)}`,
       ) {
         alert(
           errorData?.message ||
-            "AWL Trading is currently closed. Please come back later.",
+            "HEL SUUQ is currently closed. Please come back later.",
         );
 
         return;
@@ -404,7 +404,7 @@ Total: $${finalGrandTotal.toFixed(2)}`,
       if (err?.response?.status === 403) {
         alert(
           errorData?.message ||
-            "AWL Trading is currently closed. Please come back later.",
+            "HEL SUUQ is currently closed. Please come back later.",
         );
 
         return;

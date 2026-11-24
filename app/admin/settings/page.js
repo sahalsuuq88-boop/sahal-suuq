@@ -90,14 +90,14 @@ export default function AdminSettings() {
     }
 
     if (title === "About") {
-      alert("AWL Trading Admin\nVersion 1.0.0");
+      alert("HEL SUUQ Admin\nVersion 1.0.0");
     }
   };
 
   const menuItems = [
     {
       title: "Store Control",
-      subtitle: "Open or close AWL Trading",
+      subtitle: "Open or close HEL SUUQ",
       icon: Power,
     },
     {
@@ -318,7 +318,7 @@ export default function AdminSettings() {
 
         {/* VERSION */}
         <p className="mt-5 text-center text-xs text-gray-400">
-          AWL Trading Admin • Version 1.0.0
+          HEL SUUQ Admin • Version 1.0.0
         </p>
       </div>
     </div>

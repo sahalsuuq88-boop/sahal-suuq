@@ -95,7 +95,7 @@ export default function AdminPage() {
           </h1>
 
           <p className="mt-2 text-sm leading-6 text-[#6B7280]">
-            Welcome back to AWL Trading Company Admin Panel.
+            Welcome back to HEL SUUQ Company Admin Panel.
           </p>
           <ExchangeRate />
         </div>

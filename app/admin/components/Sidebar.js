@@ -9,6 +9,7 @@ import {
   Users,
   Folder,
   Settings,
+  MessageSquare,
 } from "lucide-react";
 import DarkLogo from "../../home/component/dackLogo";
 
@@ -37,6 +38,11 @@ const menus = [
     title: "Customers",
     href: "/admin/customers",
     icon: Users,
+  },
+  {
+    title: "Messages",
+    href: "/admin/messages",
+    icon: MessageSquare,
   },
   {
     title: "Settings",
@@ -85,11 +91,10 @@ export default function Sidebar() {
             <Link
               key={menu.title}
               href={menu.href}
-              className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${
-                active
+              className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${active
                   ? "bg-[#C8A96E] text-white shadow-sm"
                   : "bg-[#221f19] text-slate-300 hover:bg-[#342d23] hover:text-white"
-              }`}
+                }`}
             >
               <Icon size={20} />
               <span className="text-sm font-medium">{menu.title}</span>
@@ -100,7 +105,7 @@ export default function Sidebar() {
 
       {/* FOOTER */}
       <div className="border-t border-white/10 p-5">
-        <p className="text-sm font-semibold">SAHAL SUUQ</p>
+        <p className="text-sm font-semibold">HEL SUUQ</p>
 
         <span className="text-xs text-slate-400">Admin Dashboard v1.0</span>
       </div>

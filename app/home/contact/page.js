@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState } from "react";
@@ -9,6 +10,10 @@ import {
   checkmarkCircle,
   alertCircle,
   arrowForward,
+  logoWhatsapp,
+  callOutline,
+  sendOutline,
+  timeOutline,
 } from "ionicons/icons";
 
 import contactService from "../../services/contect";
@@ -32,6 +37,9 @@ export default function Contact() {
       ...prev,
       [name]: value,
     }));
+
+    if (error) setError("");
+    if (success) setSuccess("");
   };
 
   const handleSubmit = async (e) => {
@@ -77,229 +85,439 @@ export default function Contact() {
     }
   };
 
-  return (
-    <main className="min-h-screen bg-[#FDFBF7]">
-      <div className="mx-auto max-w-5xl px-5 py-10 md:px-8 md:py-16">
-        {/* HEADER */}
-        <section className="mb-10 md:mb-12">
-          <div className="mb-4 flex items-center gap-2">
-            <IonIcon
-              icon={chatbubbleEllipsesOutline}
-              className="h-4 w-4 text-[#A4865A]"
-            />
+  const whatsappNumber = "252636035585";
+  const emailAddress = "fuaadi174@gmail.com";
 
-            <span className="text-[10px] font-extrabold tracking-[2px] text-[#A4865A]">
-              GET IN TOUCH
+  const inputClass =
+    "h-[52px] w-full rounded-xl border border-[#EAE5DC] bg-[#FDFCF9] px-4 text-sm text-[#292524] outline-none transition-all duration-300 placeholder:text-[#A8A29E] focus:border-[#B4976A] focus:bg-white focus:ring-4 focus:ring-[#B4976A]/10";
+
+  const labelClass =
+    "mb-2.5 block text-[10px] font-bold tracking-[1.5px] text-[#78716C]";
+
+  return (
+    <main className="min-h-screen overflow-hidden bg-[#FDFBF7] text-[#292524]">
+
+      {/* HERO */}
+      <section className="relative border-b border-[#EAE5DC]">
+        <div className="pointer-events-none absolute -right-32 -top-40 h-[420px] w-[420px] rounded-full bg-[#D8C5A4]/15 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-16 md:px-10 md:pb-24 md:pt-24">
+
+          <div className="mb-6 flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F2EBDD]">
+              <IonIcon
+                icon={chatbubbleEllipsesOutline}
+                className="text-lg text-[#A4865A]"
+              />
+            </div>
+
+            <span className="text-[10px] font-extrabold tracking-[3px] text-[#A4865A]">
+              WE ARE HERE FOR YOU
             </span>
           </div>
 
-          <h1 className="text-4xl font-semibold leading-tight text-[#292524] md:text-5xl">
-            Waxaan jeclaan lahayn
-            <br />
-            <span className="font-normal text-[#C5A880]">
-              inaan ku maqalno.
-            </span>
-          </h1>
+          <div className="grid items-end gap-8 md:grid-cols-[1fr_350px]">
 
-          <p className="mt-4 max-w-xl text-sm leading-6 text-[#78716C]">
-            Haddii aad qabto wax su&apos;aalo ah oo ku saabsan alaabtayada
-            ama aad u baahan tahay caawinaad gaar ah, nala soo xiriir
-            wakhti kasta.
-          </p>
-        </section>
+            <div>
+              <h1 className="max-w-3xl text-5xl font-semibold leading-[1.08] tracking-[-2px] md:text-7xl md:tracking-[-3px]">
+                Let's start a
+                <br />
+                <span className="font-normal italic text-[#B4976A]">
+                  conversation.
+                </span>
+              </h1>
 
-        {/* CONTACT INFORMATION */}
-        <section className="mb-5 rounded-[18px] border border-[#E7E5E4] bg-white px-4">
-          {/* LOCATION */}
-          <div className="flex items-center py-[17px]">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[13px] bg-[#F8F4EC]">
+              <p className="mt-7 max-w-xl text-sm leading-7 text-[#78716C] md:text-base">
+                Waxaan mar walba diyaar u nahay inaan ku caawinno.
+                Haddii aad qabto su'aal, talo ama aad u baahan tahay
+                caawinaad ku saabsan adeeggeenna, nala soo xiriir.
+              </p>
+            </div>
+
+            <div className="hidden border-l border-[#E7E0D5] pb-2 pl-7 md:block">
+              <p className="text-[10px] font-bold tracking-[2px] text-[#A4865A]">
+                SAHAL SUUQ
+              </p>
+
+              <p className="mt-3 text-sm leading-7 text-[#78716C]">
+                Your trusted shopping destination.
+                Quality products, reliable service.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* MAIN CONTENT */}
+      <section className="mx-auto max-w-7xl px-5 py-14 md:px-10 md:py-20">
+
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+
+          {/* LEFT INFORMATION */}
+          <div>
+
+            <div className="mb-8">
+              <p className="text-[10px] font-extrabold tracking-[2.5px] text-[#A4865A]">
+                CONTACT INFORMATION
+              </p>
+
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
+                We'd love to hear
+                <br />
+                from you.
+              </h2>
+
+              <p className="mt-4 max-w-sm text-sm leading-7 text-[#78716C]">
+                Doorashadaada iyo kalsoonidaadu waa muhiim.
+                Si xor ah noola soo xiriir.
+              </p>
+            </div>
+
+            {/* CONTACT CARDS */}
+            <div className="space-y-3">
+
+              {/* EMAIL */}
+              <a
+                href={`mailto:${emailAddress}`}
+                className="group flex items-center gap-4 rounded-2xl border border-[#EAE5DC] bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#C8B28D] hover:shadow-lg hover:shadow-[#292524]/5"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F6F1E8] transition-colors group-hover:bg-[#EEE4D2]">
+                  <IonIcon
+                    icon={mailOutline}
+                    className="text-xl text-[#A4865A]"
+                  />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <p className="mb-1 text-[9px] font-extrabold tracking-[1.5px] text-[#A8A29E]">
+                    EMAIL US
+                  </p>
+
+                  <p className="break-all text-sm font-semibold text-[#292524]">
+                    {emailAddress}
+                  </p>
+                </div>
+
+                <IonIcon
+                  icon={arrowForward}
+                  className="text-lg text-[#A8A29E] transition-transform group-hover:translate-x-1 group-hover:text-[#A4865A]"
+                />
+              </a>
+
+              {/* PHONE */}
+              <a
+                href="tel:+252636035585"
+                className="group flex items-center gap-4 rounded-2xl border border-[#EAE5DC] bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#C8B28D] hover:shadow-lg hover:shadow-[#292524]/5"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F6F1E8] transition-colors group-hover:bg-[#EEE4D2]">
+                  <IonIcon
+                    icon={callOutline}
+                    className="text-xl text-[#A4865A]"
+                  />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <p className="mb-1 text-[9px] font-extrabold tracking-[1.5px] text-[#A8A29E]">
+                    CALL US
+                  </p>
+
+                  <p className="text-sm font-semibold text-[#292524]">
+                    +252 63 6035585
+                  </p>
+                </div>
+
+                <IonIcon
+                  icon={arrowForward}
+                  className="text-lg text-[#A8A29E] transition-transform group-hover:translate-x-1 group-hover:text-[#A4865A]"
+                />
+              </a>
+
+              {/* WHATSAPP */}
+              <a
+                href={`https://wa.me/${whatsappNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-[#EAE5DC] bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#C8B28D] hover:shadow-lg hover:shadow-[#292524]/5"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F6F1E8] transition-colors group-hover:bg-[#EEE4D2]">
+                  <IonIcon
+                    icon={logoWhatsapp}
+                    className="text-xl text-[#A4865A]"
+                  />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <p className="mb-1 text-[9px] font-extrabold tracking-[1.5px] text-[#A8A29E]">
+                    WHATSAPP
+                  </p>
+
+                  <p className="text-sm font-semibold text-[#292524]">
+                    Chat with our team
+                  </p>
+                </div>
+
+                <IonIcon
+                  icon={arrowForward}
+                  className="text-lg text-[#A8A29E] transition-transform group-hover:translate-x-1 group-hover:text-[#A4865A]"
+                />
+              </a>
+
+              {/* LOCATION */}
+              <div className="flex items-center gap-4 rounded-2xl border border-[#EAE5DC] bg-white p-5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F6F1E8]">
+                  <IonIcon
+                    icon={locationOutline}
+                    className="text-xl text-[#A4865A]"
+                  />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <p className="mb-1 text-[9px] font-extrabold tracking-[1.5px] text-[#A8A29E]">
+                    VISIT OUR LOCATION
+                  </p>
+
+                  <p className="text-sm font-semibold leading-6 text-[#292524]">
+                    Suuqa Hoose, Waaheen Market
+                  </p>
+
+                  <p className="text-xs text-[#78716C]">
+                    Hargeisa, Somaliland
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* WHATSAPP CTA */}
+            <a
+              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Salaan Sahal Suuq, waxaan u baahanahay caawinaad.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-[#1D1D1B] text-xs font-bold tracking-[1.5px] text-white transition-all duration-300 hover:bg-[#A4865A]"
+            >
+              <IonIcon icon={logoWhatsapp} className="text-xl" />
+              CHAT WITH US ON WHATSAPP
+              <IonIcon icon={arrowForward} className="text-lg" />
+            </a>
+
+          </div>
+
+          {/* RIGHT FORM */}
+          <div className="rounded-[24px] border border-[#EAE5DC] bg-white p-5 shadow-[0_15px_60px_rgba(41,37,36,0.035)] md:p-9">
+
+            <div className="mb-8 flex items-start justify-between gap-4">
+              <div>
+                <p className="text-[10px] font-extrabold tracking-[2px] text-[#A4865A]">
+                  SEND A MESSAGE
+                </p>
+
+                <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
+                  How can we help?
+                </h2>
+
+                <p className="mt-2 text-sm leading-6 text-[#78716C]">
+                  Fariintaada noo soo dir, waan kula soo xiriiri doonnaa.
+                </p>
+              </div>
+
+              <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#F6F1E8] sm:flex">
+                <IonIcon
+                  icon={sendOutline}
+                  className="text-xl text-[#A4865A]"
+                />
+              </div>
+            </div>
+
+            {/* SUCCESS */}
+            {success && (
+              <div className="mb-6 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-4">
+                <IonIcon
+                  icon={checkmarkCircle}
+                  className="mt-0.5 shrink-0 text-xl text-green-600"
+                />
+
+                <p className="text-sm leading-6 text-green-700">
+                  {success}
+                </p>
+              </div>
+            )}
+
+            {/* ERROR */}
+            {error && (
+              <div className="mb-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
+                <IonIcon
+                  icon={alertCircle}
+                  className="mt-0.5 shrink-0 text-xl text-red-600"
+                />
+
+                <p className="text-sm leading-6 text-red-700">
+                  {error}
+                </p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+
+              {/* NAME */}
+              <div className="grid gap-5 sm:grid-cols-2">
+
+                <div>
+                  <label htmlFor="firstName" className={labelClass}>
+                    FIRST NAME
+                  </label>
+
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    value={form.firstName}
+                    onChange={handleChange}
+                    placeholder="Your first name"
+                    autoComplete="given-name"
+                    className={inputClass}
+                    disabled={loading}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="lastName" className={labelClass}>
+                    LAST NAME
+                  </label>
+
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    value={form.lastName}
+                    onChange={handleChange}
+                    placeholder="Your last name"
+                    autoComplete="family-name"
+                    className={inputClass}
+                    disabled={loading}
+                  />
+                </div>
+
+              </div>
+
+              {/* EMAIL */}
+              <div className="mt-6">
+                <label htmlFor="email" className={labelClass}>
+                  EMAIL ADDRESS
+                </label>
+
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  className={inputClass}
+                  disabled={loading}
+                />
+              </div>
+
+              {/* MESSAGE */}
+              <div className="mt-6">
+                <label htmlFor="message" className={labelClass}>
+                  YOUR MESSAGE
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder="Tell us how we can help..."
+                  rows={6}
+                  disabled={loading}
+                  className="w-full resize-none rounded-xl border border-[#EAE5DC] bg-[#FDFCF9] px-4 py-4 text-sm leading-7 text-[#292524] outline-none transition-all duration-300 placeholder:text-[#A8A29E] focus:border-[#B4976A] focus:bg-white focus:ring-4 focus:ring-[#B4976A]/10 disabled:opacity-60"
+                />
+              </div>
+
+              {/* SUBMIT */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="mt-7 flex h-[56px] w-full items-center justify-center gap-3 rounded-xl bg-[#1D1D1B] text-xs font-extrabold tracking-[1.5px] text-white transition-all duration-300 hover:bg-[#A4865A] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {loading ? (
+                  <>
+                    <span className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    SENDING MESSAGE...
+                  </>
+                ) : (
+                  <>
+                    SEND MESSAGE
+                    <IonIcon icon={arrowForward} className="text-lg" />
+                  </>
+                )}
+              </button>
+
+              <p className="mt-5 text-center text-[11px] leading-5 text-[#A8A29E]">
+                Thank you for choosing Sahal Suuq.
+                <br />
+                We're always happy to assist you.
+              </p>
+
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+      {/* LOCATION BANNER */}
+      <section className="mx-auto max-w-7xl px-5 pb-16 md:px-10 md:pb-24">
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Waaheen+Market+Hargeisa+Somaliland"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex flex-col items-start justify-between gap-6 overflow-hidden rounded-[24px] bg-[#22211F] p-7 text-white transition-all duration-300 hover:bg-[#302D28] md:flex-row md:items-center md:p-10"
+        >
+          <div className="pointer-events-none absolute -right-10 -top-24 h-64 w-64 rounded-full border border-white/10 transition-transform duration-700 group-hover:scale-125" />
+
+          <div className="relative flex items-center gap-5">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10">
               <IonIcon
                 icon={locationOutline}
-                className="h-[21px] w-[21px] text-[#A4865A]"
+                className="text-2xl text-[#D2B88D]"
               />
             </div>
 
-            <div className="ml-[13px]">
-              <p className="mb-1 text-[9px] font-extrabold tracking-[1.5px] text-[#78716C]">
-                XAFIISKA GUUD
+            <div>
+              <p className="text-[10px] font-bold tracking-[2px] text-[#D2B88D]">
+                FIND US HERE
               </p>
 
-              <p className="text-[13px] font-medium text-[#292524]">
-                Hargeisa, Somaliland
-              </p>
-            </div>
-          </div>
+              <h3 className="mt-2 text-lg font-semibold md:text-xl">
+                Waaheen Market, Hargeisa
+              </h3>
 
-          <div className="h-px bg-[#F0EEEB]" />
-
-          {/* EMAIL */}
-          <div className="flex items-center py-[17px]">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[13px] bg-[#F8F4EC]">
-              <IonIcon
-                icon={mailOutline}
-                className="h-[21px] w-[21px] text-[#A4865A]"
-              />
-            </div>
-
-            <div className="ml-[13px]">
-              <p className="mb-1 text-[9px] font-extrabold tracking-[1.5px] text-[#78716C]">
-                E-MAILKA
-              </p>
-
-              <p className="text-[13px] font-medium text-[#292524]">
-                support@awl.online
+              <p className="mt-1 text-xs text-white/55">
+                Suuqa Hoose, Hargeisa, Somaliland
               </p>
             </div>
           </div>
-        </section>
 
-        {/* FORM */}
-        <section className="rounded-[20px] border border-[#E7E5E4] bg-white p-[18px] md:p-7">
-          <h2 className="mb-5 text-lg font-bold text-[#292524]">
-            Send us a message
-          </h2>
+          <div className="relative flex items-center gap-3 text-xs font-bold tracking-[1.5px] text-[#D2B88D]">
+            GET DIRECTIONS
+            <IonIcon
+              icon={arrowForward}
+              className="text-lg transition-transform group-hover:translate-x-1"
+            />
+          </div>
+        </a>
+      </section>
 
-          {/* SUCCESS */}
-          {success && (
-            <div className="mb-4 flex items-center gap-2 rounded-[10px] border border-[#BBF7D0] bg-[#F0FDF4] p-3">
-              <IonIcon
-                icon={checkmarkCircle}
-                className="h-5 w-5 shrink-0 text-[#15803D]"
-              />
-
-              <p className="text-xs text-[#15803D]">
-                {success}
-              </p>
-            </div>
-          )}
-
-          {/* ERROR */}
-          {error && (
-            <div className="mb-4 flex items-center gap-2 rounded-[10px] border border-[#FECACA] bg-[#FEF2F2] p-3">
-              <IonIcon
-                icon={alertCircle}
-                className="h-5 w-5 shrink-0 text-[#DC2626]"
-              />
-
-              <p className="text-xs text-[#DC2626]">
-                {error}
-              </p>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit}>
-            {/* FIRST + LAST NAME */}
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {/* FIRST NAME */}
-              <div>
-                <label
-                  htmlFor="firstName"
-                  className="mb-2 block text-[9px] font-extrabold tracking-[1.4px] text-[#78716C]"
-                >
-                  FIRST NAME
-                </label>
-
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  value={form.firstName}
-                  onChange={handleChange}
-                  placeholder="First name"
-                  className="h-12 w-full rounded-[10px] border border-[#E7E5E4] bg-[#FAFAF9] px-[13px] text-[13px] text-[#292524] outline-none transition focus:border-[#A4865A]"
-                />
-              </div>
-
-              {/* LAST NAME */}
-              <div>
-                <label
-                  htmlFor="lastName"
-                  className="mb-2 block text-[9px] font-extrabold tracking-[1.4px] text-[#78716C]"
-                >
-                  LAST NAME
-                </label>
-
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  value={form.lastName}
-                  onChange={handleChange}
-                  placeholder="Last name"
-                  className="h-12 w-full rounded-[10px] border border-[#E7E5E4] bg-[#FAFAF9] px-[13px] text-[13px] text-[#292524] outline-none transition focus:border-[#A4865A]"
-                />
-              </div>
-            </div>
-
-            {/* EMAIL */}
-            <div className="mt-[17px]">
-              <label
-                htmlFor="email"
-                className="mb-2 block text-[9px] font-extrabold tracking-[1.4px] text-[#78716C]"
-              >
-                EMAIL ADDRESS
-              </label>
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="you@example.com"
-                autoComplete="email"
-                className="h-12 w-full rounded-[10px] border border-[#E7E5E4] bg-[#FAFAF9] px-[13px] text-[13px] text-[#292524] outline-none transition focus:border-[#A4865A]"
-              />
-            </div>
-
-            {/* MESSAGE */}
-            <div className="mt-[17px]">
-              <label
-                htmlFor="message"
-                className="mb-2 block text-[9px] font-extrabold tracking-[1.4px] text-[#78716C]"
-              >
-                MESSAGE
-              </label>
-
-              <textarea
-                id="message"
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-                placeholder="Write your message..."
-                rows={6}
-                className="w-full resize-none rounded-[10px] border border-[#E7E5E4] bg-[#FAFAF9] px-[13px] py-[13px] text-[13px] text-[#292524] outline-none transition focus:border-[#A4865A]"
-              />
-            </div>
-
-            {/* SUBMIT */}
-            <button
-              type="submit"
-              disabled={loading}
-              className={`mt-[22px] flex h-[54px] w-full items-center justify-center gap-2.5 rounded-[12px] bg-[#171717] transition hover:bg-[#292929] ${
-                loading
-                  ? "cursor-not-allowed opacity-60"
-                  : "cursor-pointer"
-              }`}
-            >
-              {loading ? (
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-              ) : (
-                <>
-                  <span className="text-[10px] font-extrabold tracking-[1.5px] text-white">
-                    SEND MESSAGE
-                  </span>
-
-                  <IonIcon
-                    icon={arrowForward}
-                    className="h-[18px] w-[18px] text-white"
-                  />
-                </>
-              )}
-            </button>
-          </form>
-        </section>
+      {/* FOOTER NOTE */}
+      <div className="border-t border-[#EAE5DC] py-7 text-center">
+        <p className="text-[10px] font-medium tracking-[1px] text-[#A8A29E]">
+          SAHAL SUUQ © {new Date().getFullYear()} — WE'RE HERE TO HELP.
+        </p>
       </div>
+
     </main>
   );
 }

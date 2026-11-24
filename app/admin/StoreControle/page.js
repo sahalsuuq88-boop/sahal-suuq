@@ -20,7 +20,7 @@ const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 const DEFAULT_MESSAGE =
-  "AWL Trading is currently closed. Please come back later.";
+  "HEL SUUQ is currently closed. Please come back later.";
 
 const reasons = [
   "Prayer Time",
@@ -465,21 +465,21 @@ export default function StoreControl() {
         "Prayer Time"
       ) {
         setMessage(
-          "AWL Trading is currently closed for prayer time. Please come back later.",
+          "HEL SUUQ is currently closed for prayer time. Please come back later.",
         );
       } else if (
         selectedReason ===
         "Maintenance"
       ) {
         setMessage(
-          "AWL Trading is temporarily closed for maintenance. Please come back later.",
+          "HEL SUUQ is temporarily closed for maintenance. Please come back later.",
         );
       } else if (
         selectedReason ===
         "Holiday"
       ) {
         setMessage(
-          "AWL Trading is currently closed for a holiday. Please come back later.",
+          "HEL SUUQ is currently closed for a holiday. Please come back later.",
         );
       } else if (
         selectedReason ===
@@ -532,7 +532,7 @@ export default function StoreControl() {
               </h1>
 
               <p className="mt-1 text-sm text-gray-500">
-                Control AWL Trading availability
+                Control HEL SUUQ availability
               </p>
             </div>
           </div>
@@ -573,8 +573,8 @@ export default function StoreControl() {
                 }`}
               >
                 {isStoreOpen
-                  ? "AWL Trading is OPEN"
-                  : "AWL Trading is CLOSED"}
+                  ? "HEL SUUQ is OPEN"
+                  : "HEL SUUQ is CLOSED"}
               </h2>
 
               <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -791,7 +791,7 @@ export default function StoreControl() {
                   <>
                     <Lock size={19} />
 
-                    Close AWL Trading
+                    Close HEL SUUQ
                   </>
                 )}
               </button>
@@ -809,7 +809,7 @@ export default function StoreControl() {
 
               <div>
                 <h3 className="text-sm font-extrabold text-[#0B3B24]">
-                  AWL Trading is Open
+                  HEL SUUQ is Open
                 </h3>
 
                 <p className="mt-1 text-xs leading-5 text-[#53665B]">
@@ -879,8 +879,8 @@ export default function StoreControl() {
 
             <h2 className="text-lg font-extrabold text-[#222]">
               {confirmType === "open"
-                ? "Open AWL Trading"
-                : "Close AWL Trading"}
+                ? "Open HEL SUUQ"
+                : "Close HEL SUUQ"}
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-gray-500">

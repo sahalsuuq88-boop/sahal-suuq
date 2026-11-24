@@ -17,7 +17,7 @@ export const sliderData = [
   {
     id: "2",
     title: "TASTE THE QUALITY,",
-    highlight: "TRUST AWL",
+    highlight: "TRUST HEL",
     description:
       "Cuntooyinka aad jeceshahay ee qaydhiyaha ah, had iyo jeer diyaar.",
     button: "HADA DALBO",

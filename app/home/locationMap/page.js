@@ -34,7 +34,7 @@ export default function LocationMap() {
 
   const getCurrentLocation = () => {
     if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser.");
+      alert("Location is not supported by your browser.");
       return;
     }
 
@@ -42,45 +42,33 @@ export default function LocationMap() {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const newLocation = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        };
+        const latitude = Number(
+          position.coords.latitude.toFixed(4)
+        );
 
-        console.log("CURRENT GPS LOCATION:", newLocation);
+        const longitude = Number(
+          position.coords.longitude.toFixed(4)
+        );
+
+        const newLocation = {
+          latitude,
+          longitude,
+        };
 
         setLocation(newLocation);
         setLocationLoading(false);
+
+        console.log("Location:", newLocation);
+        console.log("Accuracy:", position.coords.accuracy, "meters");
       },
-
       (error) => {
-        console.error("LOCATION ERROR:", error);
-
-        let message =
-          "Your location could not be detected. Please check your location settings.";
-
-        if (error.code === 1) {
-          message =
-            "Location permission was denied. Please allow location access in your browser.";
-        }
-
-        if (error.code === 2) {
-          message =
-            "Your location is unavailable. Please check GPS or internet connection.";
-        }
-
-        if (error.code === 3) {
-          message = "Location request timed out. Please try again.";
-        }
-
-        alert(message);
-
+        console.error("Location error:", error.message);
+        alert(error.message);
         setLocationLoading(false);
       },
-
       {
         enableHighAccuracy: true,
-        timeout: 15000,
+        timeout: 30000,
         maximumAge: 0,
       }
     );

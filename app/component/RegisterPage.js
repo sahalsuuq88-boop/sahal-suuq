@@ -184,7 +184,7 @@ const Register = () => {
             </h1>
 
             <p className="mt-2 text-sm leading-5 text-[#888]">
-              Join AWL Trading and start shopping today.
+              Join HEL SUUQ and start shopping today.
             </p>
           </div>
 
