@@ -1,3 +1,4 @@
+
 "use client";
 
 import AuthGuard from "../component/AuthGard";
@@ -6,20 +7,18 @@ import Sidebar from "./components/Sidebar";
 
 export default function AdminLayout({ children }) {
   return (
-    <div className="min-h-screen bg-[#F8F7F4]">
-      {/* Desktop Sidebar */}
-      <Sidebar />
+    <AuthGuard requireAdmin>
+      <div className="min-h-screen bg-[#F8F7F4]">
+        <Sidebar />
 
-      {/* Main Area */}
-      <div className="lg:ml-72">
-        {/* Header */}
-        <Navbar />
+        <div className="lg:ml-72">
+          <Navbar />
 
-        {/* Page Content */}
-        <main className="min-h-[calc(100vh-72px)]">
-          <AuthGuard>{children}</AuthGuard>
-        </main>
+          <main className="min-h-[calc(100vh-72px)]">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </AuthGuard>
   );
 }

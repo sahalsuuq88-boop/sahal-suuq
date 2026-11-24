@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect } from "react";
@@ -5,14 +6,15 @@ import { useRouter } from "next/navigation";
 import { useUser } from "../hook/useUser";
 
 import Navbar from "./component/Navbar";
-import AuthGuard from "../component/AuthGard";
 
 const Layout = ({ children }) => {
   const { user, loading } = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && user?.role?.trim() === "admin") {
+    const role = user?.role?.trim()?.toLowerCase();
+
+    if (!loading && role === "admin") {
       router.replace("/admin");
     }
   }, [user, loading, router]);
@@ -25,7 +27,7 @@ const Layout = ({ children }) => {
     );
   }
 
-  if (user?.role?.trim() === "admin") {
+  if (user?.role?.trim()?.toLowerCase() === "admin") {
     return (
       <div className="flex items-center justify-center h-screen">
         Redirecting...
@@ -36,10 +38,7 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main>
-        {" "}
-        <AuthGuard>{children} </AuthGuard>
-      </main>
+      <main>{children}</main>
     </div>
   );
 };

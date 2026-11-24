@@ -21,24 +21,24 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Sahal Suuq | Gurigaaga, Gaadhsii - Online Shopping Hargeisa",
+    default: "Hel Suuq | Gurigaaga, Gaadhsii - Online Shopping Hargeisa",
     template: "%s | Sahal Suuq",
   },
   description:
-    "Sahal Suuq waa suuqa online-ka ah ee Hargeisa. Ka dalbo raashinka, agabka nadaafadda, iyo alaabta guriga si fudud — Gurigaaga, gaadhsii.",
+    "Hel Suuq waa suuqa online-ka ah ee Hargeisa. Ka dalbo raashinka, agabka nadaafadda, iyo alaabta guriga si fudud — Gurigaaga, gaadhsii.",
   keywords: [
-    "Sahal Suuq",
-    "sahalsuuq",
-    "Sahal Suuq Hargeisa",
+    "Hel Suuq",
+    "helsuuq",
+    "Hel Suuq Hargeisa",
     "online shopping Hargeisa",
     "delivery Hargeisa",
     "Somaliland e-commerce",
   ],
   openGraph: {
-    title: "Sahal Suuq | Gurigaaga, Gaadhsii",
+    title: "HEL Suuq | Gurigaaga, Gaadhsii",
     description: "Ka dalbo alaabta guriga iyo raashinka Hargeisa si fudud oo degdeg ah.",
     url: "https://sahalsuuq-frontend.vercel.app",
-    siteName: "Sahal Suuq",
+    siteName: "Hel Suuq",
     type: "website",
   },
 };

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function HeroSlide({ item }) {
   const isDark = item?.isDark;
 
@@ -156,7 +158,7 @@ export default function HeroSlide({ item }) {
           ${buttonClass}
         `}
             >
-              <span>{item?.button}</span>
+              <Link href="/home/shop">{item?.button}</Link>
 
               <span
                 className="

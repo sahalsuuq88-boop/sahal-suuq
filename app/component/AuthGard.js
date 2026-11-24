@@ -1,38 +1,25 @@
+
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useUser } from "../hook/useUser";
 
-const publicAuthPages = ["/login", "/LoginPage", "/register"];
-
-export default function AuthGuard({ children }) {
+export default function AuthGuard({ children, requireAdmin = false }) {
   const router = useRouter();
-  const pathname = usePathname();
   const { user, loading } = useUser();
 
   useEffect(() => {
-    if (loading) return;
+    if (loading || !requireAdmin) return;
 
-    const isAuthPage = publicAuthPages.includes(pathname);
+    const role = user?.role?.trim()?.toLowerCase();
 
-    // User ma login → ha gelin protected pages
-    if (!user && !isAuthPage) {
+    if (!user) {
       router.replace("/login");
-      return;
+    } else if (role !== "admin") {
+      router.replace("/home");
     }
-
-    // User hore u login yahay → ha gelin Login/Register
-    if (user && isAuthPage) {
-      const role = user?.role?.trim()?.toLowerCase();
-
-      if (role === "admin") {
-        router.replace("/admin");
-      } else {
-        router.replace("/");
-      }
-    }
-  }, [user, loading, pathname, router]);
+  }, [user, loading, requireAdmin, router]);
 
   if (loading) {
     return (
@@ -40,6 +27,10 @@ export default function AuthGuard({ children }) {
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#C8A96E] border-t-transparent" />
       </div>
     );
+  }
+
+  if (requireAdmin && user?.role?.trim()?.toLowerCase() !== "admin") {
+    return null;
   }
 
   return children;
